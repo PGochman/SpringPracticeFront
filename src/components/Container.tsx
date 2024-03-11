@@ -5,7 +5,7 @@ type props = {
 }
 
 export default function ({children} : props){
-    return <section className="flex flex-col pt-24 px-32 bg-blue-100 h-screen items-center">
+    return <section className="flex flex-col pt-24 px-32 items-center">
         {children}
     </section>
 }

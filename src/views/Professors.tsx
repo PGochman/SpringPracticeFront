@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom"
 import ViewProfessor from "../components/Professors/ViewProfessor"
-import EditProfessor from "../components/Professors/EditProfessor"
 import CreateProfessor from "../components/Professors/CreateProfessor"
 
 export default function Professors(){
@@ -8,8 +7,6 @@ export default function Professors(){
     return (
         pathname.includes("view") ? (
             <ViewProfessor/>
-        ) : pathname.includes("edit") ? (
-            <EditProfessor/>
         ) : pathname.includes("create") ? (
             <CreateProfessor/>
         ) : (

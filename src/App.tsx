@@ -6,8 +6,7 @@ import RecordsRoutes from './routes/RecordsRoute'
 
 function App() {
 
-  const {pathname} = useLocation()
-  console.log(pathname)
+  const {pathname} = useLocation()  
 
   return (
     <>

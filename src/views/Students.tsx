@@ -8,8 +8,6 @@ export default function Students(){
     return (
         pathname.includes("view") ? (
             <ViewStudent/>
-        ) : pathname.includes("edit") ? (
-            <EditStudent/>
         ) : pathname.includes("create") ? (
             <CreateStudent/>
         ) : (

@@ -1,6 +1,5 @@
 import { useLocation } from "react-router-dom"
 import ViewGrade from "../components/Grades/ViewGrade"
-import EditGrade from "../components/Grades/EditGrade"
 import CreateGrade from "../components/Grades/CreateGrade"
 
 export default function Grades(){
@@ -8,8 +7,6 @@ export default function Grades(){
     return (
         pathname.includes("view") ? (
             <ViewGrade/>
-        ) : pathname.includes("edit") ? (
-            <EditGrade/>
         ) : pathname.includes("create") ? (
             <CreateGrade/>
         ) : (

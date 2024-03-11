@@ -1,14 +1,19 @@
 import { useEffect, useState } from "react"
-import { ResponseProfessorArray } from "../../Types"
+import { Professor, ResponseError, ResponseProfessorArray } from "../../Types"
 import axios from "axios"
 import Container from "../Container"
 import ViewAllData from "../ViewAllData"
 import ProfessorCard from "./ProfessorCard"
+import ErrorComponent from "../ErrorComponent"
 
 export default function ViewGrade(){
     const [professors, setProfessors] = useState<ResponseProfessorArray>()
     const [lastname, setLastname] = useState<string>("")
     const [specialty, setSpecialty] = useState<string>("")
+    const [activeProfessors, setActiveProfessors] = useState<Array<Professor>>()
+    const [inactiveProfessors, setInactiveProfessors] = useState<Array<Professor>>()
+    const [error, setError] = useState<ResponseError | null>(null)
+
 
     const getProfessors = async () => {
         const response = await axios("http://localhost:8080/professor")
@@ -16,19 +21,35 @@ export default function ViewGrade(){
     }   
 
     const findProfessorsByParams = async () => {
-        const response = await axios(`http://localhost:8080/professor/find?lastname=${lastname}&specialty=${specialty}`)
-        setProfessors(response.data)
+        try{
+            const response = await axios(`http://localhost:8080/professor/find?lastname=${lastname}&specialty=${specialty}`)
+            setProfessors(response.data)
+        } catch(error : any){
+            setError(error.response.data)
+        }
     }
 
     const cleanFilters = () => {
         getProfessors()
         setLastname("")
         setSpecialty("")
+        setError(null)
     }
 
     useEffect(() => {
         getProfessors()
     }, [])
+
+    useEffect(() => {
+        if(professors?.data.length){
+            const active = professors.data.filter((professor : Professor) => professor.active )
+            const inactive = professors.data.filter((professor : Professor) => !professor.active )
+            setActiveProfessors(active)
+            setInactiveProfessors(inactive)
+        }
+        setError(null)
+        
+    }, [professors])
 
     return (
         <Container>
@@ -47,17 +68,36 @@ export default function ViewGrade(){
                     <button className="bg-blue-500 border border-blue-700 rounded" onClick={cleanFilters}>Quitar filtros</button>
                 </div>
             </section>
-            <ViewAllData>
-                {professors?.data ? (
-                    professors.data.map(professor => {
-                        return(
-                            <ProfessorCard professor={professor} key={professor.id} />
-                        )
-                    })
-                ) : (
-                    <h1>No hay Profesores cargados</h1>
-                )}
-            </ViewAllData>
+            {professors?.data.length ? (
+                <>
+                {activeProfessors?.length ? (
+                    <>
+                        <h1 className="text-4xl pb-4">Profesores activos</h1>
+                        <ViewAllData>
+                            {activeProfessors.map((professor) => {
+                              return <ProfessorCard professor={professor} key={professor.id}/>  
+                            })}
+                        </ViewAllData>
+                    </>
+                ) : ""}
+                {inactiveProfessors?.length ? (
+                    <>
+                        <h1 className="text-4xl pb-4">Profesores inactivos</h1>
+                        <ViewAllData>
+                            {inactiveProfessors.map((professor) => {
+                              return <ProfessorCard professor={professor} key={professor.id}/>  
+                            })}
+                        </ViewAllData>
+                    </>
+                ) : ""}
+                </>
+            ) : (
+                <h1>No se encontraron profesores</h1>
+            )}
+            {error && (
+                <ErrorComponent>
+                    <h1 className="text-2xl">{error.data.message}</h1>
+                </ErrorComponent>)}
         </Container>
     )
 }

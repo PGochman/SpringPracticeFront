@@ -1,10 +1,8 @@
 import { Link } from "react-router-dom";
 import { Grade } from "../../Types";
 import Card from "../Card";
-import axios from "axios";
 
 export default function GradeCard({grade, changeActive} : {grade : Grade, changeActive: (grade: Grade) => Promise<void>}){
-
     return(
         <Card>
             <span>Nota: {grade.grade}</span>

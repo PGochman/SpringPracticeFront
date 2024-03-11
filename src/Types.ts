@@ -55,6 +55,34 @@ export type Student = {
     grades: null | Array<Grade>
 }
 
+export type StudentCreation = {
+    name: string,
+    lastName: string,
+    birthDate: string,
+    address: string,
+    dni: number,
+}
+
+export type ProfessorCreation = {
+    name: string,
+    lastName: string,
+    specialty: string,
+    dni: number,
+}
+
+export type CourseCreation = {
+    name: string,
+    code: string,
+    description: string
+}
+
+export type GradeCreation = {
+    grade: number,
+    evaluationType: string,
+    studentId: number,
+    courseId: number
+}
+
 export type Course = {
     id: number,
     name: string,

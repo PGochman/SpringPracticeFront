@@ -1,6 +1,6 @@
-import { Professor } from "../Types";
+import { Professor, ProfessorCreation } from "../Types";
 
-export default function validateProfessor(professor : Professor){
+export default function validateProfessor(professor : Professor | ProfessorCreation){
     const regexString = /^[A-Za-z\s'-]+$/;
     const regexNumber = /^\d+$/
     let error = []

@@ -100,7 +100,7 @@ export default function EditStudent({id} : {id: string}){
                 </section>
 
                 <section>
-                    <label htmlFor="address">Especialidad: </label>
+                    <label htmlFor="address">Dirección: </label>
                     <input name="address" value={student?.address || ""} onChange={changeStudent}></input>
                 </section>
 

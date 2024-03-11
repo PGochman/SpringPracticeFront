@@ -1,10 +1,10 @@
-import { Grade } from "../Types";
+import { Grade, GradeCreation } from "../Types";
 
-export default function validateGrade(grade : Grade){
+export default function validateGrade(grade : Grade | GradeCreation){
     var regexEvaluacion = /^[a-zA-Z0-9\s]+$/
     let error = []
 
-    if(!regexEvaluacion.test(grade.evaluationType)){
+    if(!regexEvaluacion.test(grade.evaluationType) && grade.evaluationType.length){
         error.push("-El tipo de evaluación no pueden contener caracteres especiales")
     }
 
@@ -16,7 +16,9 @@ export default function validateGrade(grade : Grade){
         error.push("-La nota debe ser mayor o igual a 1") 
     }
 
-
+    if(!grade.evaluationType.length){
+        error.push("-Ingresar tipo de evaluación")
+    }
 
     return error
 }

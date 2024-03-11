@@ -4,6 +4,7 @@ import axios from "axios"
 import Container from "../Container"
 import { useNavigate } from "react-router-dom"
 import ErrorComponent from "../ErrorComponent"
+import validateCourse from "../../validations/CourseValidation"
 
 export default function EditCourse({id} : {id: string}){
     const [error, setError] = useState<ResponseError | null>(null)
@@ -26,10 +27,10 @@ export default function EditCourse({id} : {id: string}){
         getDetail()
     }, [])
 
-    // useEffect(() => {
-    //     grade &&
-    //     setValidateError(validateGrade(grade))
-    // }, [grade])
+    useEffect(() => {
+        course &&
+        setValidateError(validateCourse(course))
+    }, [course])
 
     const changeCourse = (e: any) => {
         if(course){
@@ -67,8 +68,14 @@ export default function EditCourse({id} : {id: string}){
                         </section>
 
                         <section>
-                            <label htmlFor="description"></label>
+                            <label htmlFor="description">Descripción: </label>
                             <input name="description" value={course.description} onChange={changeCourse}></input>
+                        </section>
+
+                        <section className="flex flex-col text-center">
+                            {validateError.map((error) => {
+                            return <span className="text-red-500">{error}</span>
+                            })}
                         </section>
 
                         <button className={`${validateError.length > 0 ? "bg-blue-200" : "bg-blue-500"} p-1 rounded border-2 border-blue-700`} type="submit" disabled={validateError.length > 0}>Guardar cambios</button>

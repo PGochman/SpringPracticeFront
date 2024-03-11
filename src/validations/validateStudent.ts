@@ -1,6 +1,6 @@
-import { Student } from "../Types";
+import { Student, StudentCreation } from "../Types";
 
-export default function validateStudent(student : Student){
+export default function validateStudent(student : Student | StudentCreation){
     const regexString = /^[A-Za-z\s'-]+$/
     const regexNumber = /^\d+$/
     var regexDireccion = /^[a-zA-Z0-9\s]+$/
@@ -19,6 +19,10 @@ export default function validateStudent(student : Student){
 
     if(!regexDireccion.test(student.address)){
         error.push("-La dirección no puede contener caracteres especiales")
+    }
+
+    if(!student.birthDate){
+        error.push("-Se debe ingresar una fecha de nacimiento")
     }
 
     return error

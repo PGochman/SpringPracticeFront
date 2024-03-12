@@ -6,8 +6,7 @@ export default function validateCourse(course : Course | CourseCreation){
 
 
     let error = []
-    if(!regexString.test(course.name) || !regexString.test(course.description)){
-        console.log(course)
+    if((!regexString.test(course.name) || !regexString.test(course.description)) && (course.name.length && course.description.length)){
         error.push("-El nombre y descripción no pueden contener caracteres especiales")
     }
 
@@ -15,8 +14,18 @@ export default function validateCourse(course : Course | CourseCreation){
         error.push("-El código debe estar conformado por tres numeros y una letra")
     }
 
-    if(course.code.length != 4){
+    if(course.code.length != 4 && course.code.length > 0){
         error.push("-El código debe tener 4 caracteres")
+    }
+
+    if(!course.name.length){
+        error.push("-Ingresar nombre del curso")
+    }
+    if(!course.description.length){
+        error.push("-Ingresar descripcion del curso")
+    }
+    if(!course.code.length){
+        error.push("-Ingresar código del curso")
     }
 
     return error

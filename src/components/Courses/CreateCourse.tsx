@@ -40,6 +40,7 @@ export default function CreateCourse(){
 
     return (
         <Container>
+            <h1 className="text-4xl">Crear curso</h1>
             <form className="flex flex-col justify-around items-center h-[500px]" onSubmit={updateCourse}>
                 <section>
                     <label htmlFor="name">Nombre: </label>
@@ -62,7 +63,7 @@ export default function CreateCourse(){
                     })}
                 </section>
 
-                <button className={`${validateError.length > 0 ? "bg-blue-200" : "bg-blue-500"} p-1 rounded border-2 border-blue-700`} type="submit" disabled={validateError.length > 0}>Guardar cambios</button>
+                <button className={`${validateError.length > 0 ? "bg-blue-200" : "bg-blue-500"} p-1 rounded border-2 border-blue-700`} type="submit" disabled={validateError.length > 0}>Crear curso</button>
             </form>
             
             {error && (

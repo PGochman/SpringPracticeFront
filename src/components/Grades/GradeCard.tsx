@@ -7,8 +7,8 @@ export default function GradeCard({grade, changeActive} : {grade : Grade, change
         <Card>
             <span>Nota: {grade.grade}</span>
             <span>Evaluación: {grade.evaluationType}</span>
-            <span>Estudiante: {grade.student.name + " " + grade.student.lastName}</span>
-            <span>Curso: {grade.course.name + "-" + grade.course.code}</span>
+            <span>Estudiante: {grade.student.name + " " + grade.student.lastName} (ID: {grade.student.id})</span>
+            <span>Curso: {grade.course.name + "-" + grade.course.code} (ID: {grade.course.id})</span>
             <div className="flex justify-evenly p-1 items-center"> 
                 <Link className="bg-blue-200 border border-blue-400 p-1 text-center" to={"/edit/grade/" + grade.id}>Editar</Link>
                 <button onClick={() => changeActive(grade)} className="bg-blue-200 border border-blue-400 p-1 w-fit">{grade.active ? "Desactivar" : "Reactivar"}</button>

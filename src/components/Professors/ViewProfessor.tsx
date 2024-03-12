@@ -25,6 +25,7 @@ export default function ViewGrade(){
             const response = await axios(`http://localhost:8080/professor/find?lastname=${lastname}&specialty=${specialty}`)
             setProfessors(response.data)
         } catch(error : any){
+            setProfessors({data: []})
             setError(error.response.data)
         }
     }
@@ -46,9 +47,8 @@ export default function ViewGrade(){
             const inactive = professors.data.filter((professor : Professor) => !professor.active )
             setActiveProfessors(active)
             setInactiveProfessors(inactive)
+            setError(null)
         }
-        setError(null)
-        
     }, [professors])
 
     return (
@@ -92,7 +92,7 @@ export default function ViewGrade(){
                 ) : ""}
                 </>
             ) : (
-                <h1>No se encontraron profesores</h1>
+                <></>
             )}
             {error && (
                 <ErrorComponent>

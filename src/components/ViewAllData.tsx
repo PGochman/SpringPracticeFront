@@ -5,7 +5,7 @@ type props = {
 }
 
 export default function ViewAllData({children} : props){
-    return <div className="grid grid-cols-3 w-[900px] justify-items-center	">
+    return <div className="grid grid-cols-3 w-[1000px] justify-items-center	">
         {children}
     </div>
 }

@@ -65,7 +65,8 @@ export default function CreateGrade(){
 
     return (
         <Container>
-            <form className="flex flex-col justify-around items-center h-[500px]" onSubmit={updateStudent}>
+            <h1 className="text-4xl">Crear nota</h1>
+            <form className="flex flex-col justify-around items-center min-h-[500px] h-fit" onSubmit={updateStudent}>
                 <section>
                     <label htmlFor="grade">Nota: </label>
                     <input type="number" min={1} max={10} step={0.5} name="grade" value={grade?.grade} onChange={changeGrade}></input>

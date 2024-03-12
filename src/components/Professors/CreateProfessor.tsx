@@ -60,6 +60,7 @@ export default function CreateProfessor(){
 
     return (
         <Container>
+            <h1 className="text-4xl">Crear profesor</h1>
             <form className="flex flex-col justify-around items-center h-[500px]" onSubmit={updateProfessor}>
                 <section>
                     <label htmlFor="name">Nombre: </label>

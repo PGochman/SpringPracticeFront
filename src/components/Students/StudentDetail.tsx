@@ -67,7 +67,7 @@ export default function StudentDetail({id} : {id: string}){
                 <div>
                     <ViewButtonsDetail LinkChangeActive={changeActive} LinkRedirectEdit={"http://localhost:5173/edit/student/" + detail?.data.id} active={detail.data.active} />
                     {detail.data.active ? (
-                        <div  className="flex flex-col items-center h-[450px] justify-evenly">
+                        <div  className="flex flex-col items-center min-h-[450px] h-fit justify-evenly">
                             <span className="text-2xl">Nombre: {detail.data.name} {detail.data.lastName}</span>
                             <span className="text-2xl">Fecha de nacimiento: {detail.data.birthDate}</span>
                             <span className="text-xl">Dirección: {detail.data.address}</span>
@@ -75,7 +75,7 @@ export default function StudentDetail({id} : {id: string}){
                             <span className="text-xl">Notas del estudiante:</span>
                             {detail.data.grades?.length ? (
                                 detail.data.grades.map((grade) => {
-                                    return <span key={grade.id}>{grade.course.name}: {grade.evaluationType} - {grade.grade}</span>
+                                    if(grade.active)return <span key={grade.id}>{grade.course.name}: {grade.evaluationType} - {grade.grade}</span>
                                 })
                                 ) : (
                                     <span>El alumno no tiene notas cargadas</span>

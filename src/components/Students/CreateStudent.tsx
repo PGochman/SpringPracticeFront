@@ -62,6 +62,7 @@ export default function CreateStudent(){
 
     return (
         <Container>
+            <h1 className="text-4xl">Crear estudiante</h1>
             <form className="flex flex-col justify-around items-center h-[500px]" onSubmit={updateStudent}>
                 <section>
                     <label htmlFor="name">Nombre: </label>

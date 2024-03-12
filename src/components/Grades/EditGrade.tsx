@@ -134,7 +134,9 @@ export default function EditGrade({id} : {id: string}){
                     </form>
                 )
             ) : (
-                <h1>{error?.data.message}</h1>
+                error && <ErrorComponent>
+                    <h1 className="text-4xl">{error?.data.message}</h1>
+                </ErrorComponent>
             )}
         </Container>
     )
